@@ -1,7 +1,7 @@
 @use 'variables' as *;
 
 .footer {
-    background-color: #070b18; // Very dark navy
+    background-color: $dark-navy; // Fixed background
     background-image:
         linear-gradient(rgba($white, 0.02) 1px, transparent 1px),
         linear-gradient(90deg, rgba($white, 0.02) 1px, transparent 1px);
@@ -44,9 +44,9 @@
 }
 
 .footer-logo-main {
-    width: 65px;
+    width: 90px;
     height: auto;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     filter: drop-shadow(0 0 15px rgba($hq-accent, 0.2));
 }
 

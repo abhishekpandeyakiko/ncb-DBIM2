@@ -1,19 +1,19 @@
-/* Premium Modern Palette (#071a36 & #154175 Based) */
-$primary-blue: #071a36;
+/* Premium Modern Palette (Theme Aware) */
+$primary-blue: var(--theme-navy, #071a36);
 /* Deepest Dark Surface */
-$accent-blue: #154175;
+$accent-blue: var(--theme-primary, #154175);
 /* Primary Professional Blue */
-$vibrant-blue: #1e5ba3;
+$vibrant-blue: var(--theme-primary, #1e5ba3);
 /* Lighter Vibrant Shade */
-$soft-blue: #f0f4f9;
+$soft-blue: var(--theme-secondary-bg, #f0f4f9);
 /* Surface background tint */
-$dark-navy: #05142b;
+$dark-navy: var(--theme-navy, #05142b);
 /* Deep background depth */
-$hq-dark: #071a36;
+$hq-dark: var(--theme-navy, #071a36);
 /* Dark card surfaces */
-$blue-hover: #1b4b8a;
+$blue-hover: var(--theme-primary, #1b4b8a);
 /* Active/Hover states */
-$hq-accent: #38bdf8;
+$hq-accent: var(--theme-accent, #38bdf8);
 /* Vibrant Sky Blue Accent */
 
 /* Functional Colors */

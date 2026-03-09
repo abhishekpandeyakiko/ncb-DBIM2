@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 
 import "../styles/Navbar.scss";
@@ -6,6 +6,8 @@ import "../styles/Navbar.scss";
 function Header() {
     const [language, setLanguage] = useState("English");
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isAccessibilityOpen, setIsAccessibilityOpen] = useState(false);
+    const [theme, setTheme] = useState(localStorage.getItem("ncb-theme") || "default");
     const [isMediaOpen, setIsMediaOpen] = useState(false);
     const [isDirectoryOpen, setIsDirectoryOpen] = useState(false);
     const [isAboutOpen, setIsAboutOpen] = useState(false);
@@ -15,6 +17,12 @@ function Header() {
     const [isDLEAOpen, setIsDLEAOpen] = useState(false);
     const [isHandBookOpen, setIsHandBookOpen] = useState(false);
     const location = useLocation();
+
+    // Effect to apply theme
+    useEffect(() => {
+        document.documentElement.setAttribute("data-theme", theme);
+        localStorage.setItem("ncb-theme", theme);
+    }, [theme]);
 
     const isMediaActive = () => {
         const mediaRoutes = [
@@ -76,21 +84,35 @@ function Header() {
         return dleaRoutes.some(path => location.pathname.startsWith(path));
     };
 
+    const toggleAccessibility = () => {
+        setIsAccessibilityOpen(!isAccessibilityOpen);
+    };
+
+    const skipToContent = (e) => {
+        e.preventDefault();
+        const mainContent = document.getElementById("main-content");
+        if (mainContent) {
+            mainContent.tabIndex = -1;
+            mainContent.focus();
+            mainContent.scrollIntoView({ behavior: 'smooth' });
+        }
+        setIsAccessibilityOpen(false);
+    };
+
+    const toggleScreenReader = () => {
+        // Mock functionality for screen reader access
+        alert("Screen Reader Access enabled. You can now use your preferred screen reader software.");
+        setIsAccessibilityOpen(false);
+    };
+
     const toggleLanguage = () => {
         setLanguage((prev) => (prev === "English" ? "Hindi" : "English"));
     };
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
-        if (isMenuOpen) {
-            setIsMediaOpen(false);
-            setIsAboutOpen(false);
-            setIsDirectoryOpen(false);
-            setIsNoticeBoardOpen(false);
-            setIsOperationsOpen(false);
-            setIsResourcesOpen(false);
-            setIsDLEAOpen(false);
-            setIsHandBookOpen(false);
+        if (!isMenuOpen) {
+            resetAccordions();
         }
     };
 
@@ -203,16 +225,12 @@ function Header() {
                             <img src="/digital_india.svg" alt="Digital India" className="digital-logo" />
                         </div>
                         <div className="utility-icons-group">
-                            {/* <button className="utility-icon-btn" aria-label="Portal/Login">
-                                <i className="bi bi-box-arrow-in-right"></i>
-                            </button>
-                            <div className="v-divider"></div> */}
                             <button className="utility-icon-btn lang-toggle" aria-label="Language Toggle" onClick={toggleLanguage}>
                                 <span className="lang-icon">अ</span>
                                 <span className="lang-label">A</span>
                             </button>
                             <div className="v-divider"></div>
-                            <button className="utility-icon-btn" aria-label="Accessibility">
+                            <button className="utility-icon-btn" aria-label="Accessibility" onClick={toggleAccessibility}>
                                 <i className="bi bi-person-wheelchair"></i>
                             </button>
                         </div>
@@ -381,6 +399,56 @@ function Header() {
 
                     {/* Mobile Overlay */}
                     {isMenuOpen && <div className="side-overlay" onClick={toggleMenu}></div>}
+
+                    {/* Accessibility Sidebar */}
+                    <div className={`accessibility-sidebar ${isAccessibilityOpen ? "active" : ""}`}>
+                        <div className="access-header">
+                            <h3>Accessibility Options</h3>
+                            <button className="close-access-btn" onClick={() => setIsAccessibilityOpen(false)}>
+                                <i className="bi bi-x-lg"></i>
+                            </button>
+                        </div>
+                        <div className="access-body">
+                            <div className="access-group">
+                                <label>Navigation</label>
+                                <button onClick={skipToContent} className="access-btn">
+                                    <i className="bi bi-arrow-down-square"></i> Skip to Main Content
+                                </button>
+                                <button onClick={toggleScreenReader} className="access-btn">
+                                    <i className="bi bi-volume-up"></i> Screen Reader Access
+                                </button>
+                            </div>
+
+                            {location.pathname === "/" && (
+                                <div className="access-group">
+                                    <label>Theme Settings</label>
+                                    <div className="theme-options">
+                                        <div
+                                            className={`theme-swatch default ${theme === "default" ? "active" : ""}`}
+                                            onClick={() => setTheme("default")}
+                                            title="NCB Blue"
+                                        >
+                                            <div className="swatch-color"></div>
+                                            <span>Blue (Default)</span>
+                                        </div>
+                                        <div
+                                            className={`theme-swatch secondary ${theme === "secondary" ? "active" : ""}`}
+                                            onClick={() => setTheme("secondary")}
+                                            title="NCB Teal"
+                                        >
+                                            <div className="swatch-color"></div>
+                                            <span>Teal Theme</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
+                            <div className="access-footer-note">
+                                <p>These settings will be saved for your next visit.</p>
+                            </div>
+                        </div>
+                    </div>
+                    {isAccessibilityOpen && <div className="side-overlay active" onClick={() => setIsAccessibilityOpen(false)}></div>}
                 </div>
             </div>
         </header>

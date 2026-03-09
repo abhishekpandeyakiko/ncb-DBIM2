@@ -3,6 +3,14 @@
 
 /* Global base styles - clean reset for government portal */
 :root {
+  --theme-primary: #1e5ba3;
+  --theme-primary-rgb: 30, 91, 163;
+  --theme-navy: #071a36;
+  --theme-navy-rgb: 7, 26, 54;
+  --theme-accent: #38bdf8;
+  --theme-accent-rgb: 56, 189, 248;
+  --theme-secondary-bg: #f8fafc;
+
   font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -10,6 +18,15 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+[data-theme='secondary'] {
+  --theme-primary: #105756;
+  --theme-primary-rgb: 16, 87, 86;
+  --theme-navy: #0a3d3c;
+  --theme-navy-rgb: 10, 61, 60;
+  --theme-accent: #26aba9;
+  --theme-accent-rgb: 38, 171, 169;
 }
 
 body {
@@ -38,12 +55,13 @@ body {
 
 a {
   font-weight: 500;
-  color: $accent-blue;
+  color: $primary-blue;
   text-decoration: inherit;
+  transition: color 0.2s;
 }
 
 a:hover {
-  color: $primary-blue;
+  color: $dark-navy;
 }
 
 h1 {
@@ -95,7 +113,7 @@ button:focus-visible {
     left: 0;
     width: 100%;
     height: 100%;
-    background: $primary-blue;
+    background: $dark-navy;
     z-index: -1;
     transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
@@ -103,7 +121,7 @@ button:focus-visible {
   &:hover {
     color: #ffffff !important;
     transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba($primary-blue, 0.3);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 
     &::before {
       transform: translateY(-100%);
@@ -112,6 +130,6 @@ button:focus-visible {
 
   &:active {
     transform: translateY(-1px);
-    box-shadow: 0 5px 10px rgba($primary-blue, 0.2);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   }
 }

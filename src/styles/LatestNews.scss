@@ -472,7 +472,7 @@
             &:hover {
                 color: white;
                 transform: translateY(-3px);
-                box-shadow: 0 10px 20px rgba($primary-blue, 0.3);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 
                 &::before {
                     transform: translateY(-100%);
@@ -481,11 +481,10 @@
 
             &:active {
                 transform: translateY(-1px);
-                box-shadow: 0 5px 10px rgba($primary-blue, 0.2);
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
             }
         }
     }
-
 }
 
 // End of .latest-news-page children
@@ -620,7 +619,7 @@
 
         h1 {
             font-size: 1.4rem;
-            color: #1e3a8a;
+            color: $primary-blue;
             font-weight: 800;
             margin: 0;
             letter-spacing: -0.5px;
@@ -683,7 +682,7 @@
 
     .archive-filter-panel {
         background: $white;
-        border: 1.5px dashed #1e3a8a; // Dashed blue border
+        border: 1.5px dashed $primary-blue; // Dashed blue border
         border-radius: 8px;
         padding: 25px;
         margin-bottom: 20px;
@@ -709,7 +708,7 @@
 
             &:focus {
                 outline: none;
-                border-color: #1e3a8a;
+                border-color: $primary-blue;
             }
         }
 
@@ -726,11 +725,11 @@
             }
 
             .btn-archive-search {
-                background: #003366; // Institutional Navy
+                background: $primary-blue; // Institutional Navy
                 color: $white;
 
                 &:hover {
-                    background: #002244;
+                    background: $vibrant-blue;
                 }
             }
 

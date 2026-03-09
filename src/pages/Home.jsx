@@ -67,7 +67,7 @@ function Home() {
     const [isPlaying, setIsPlaying] = useState(true);
     const [isTickerPaused, setIsTickerPaused] = useState(false);
 
-    const [activeOfferTab, setActiveOfferTab] = useState("Schemes");
+    const [activeOfferTab, setActiveOfferTab] = useState("National Initiatives");
     const [isNewsPlaying, setIsNewsPlaying] = useState(true);
     const [isPressPlaying, setIsPressPlaying] = useState(true);
     const [isActivityPlaying, setIsActivityPlaying] = useState(true);
@@ -340,18 +340,8 @@ function Home() {
                         </div>
                     </div>
 
-                    {/* Right Column: Leadership Cards */}
+                    {/* Right Column: Key Motto Card */}
                     <div className="about-meity-right">
-                        <div className="meity-profile-card">
-                            <div className="profile-img-box">
-                                <img src={dgProfile} alt="Shri Anurag Garg" />
-                            </div>
-                            <div className="profile-info">
-                                <span className="profile-name">Shri Anurag Garg, IPS</span>
-                                <span className="profile-designation">DIRECTOR GENERAL</span>
-                            </div>
-                        </div>
-
                         <div className="meity-profile-card">
                             <div className="profile-img-box">
                                 <div className="placeholder-emblem">
@@ -383,13 +373,13 @@ function Home() {
 
                                 <div className="offerings-tab-container">
                                     <div className="offerings-tabs-row">
-                                        <button className={`offer-tab ${activeOfferTab === "Schemes" ? "active" : ""}`} onClick={() => setActiveOfferTab("Schemes")}>Schemes</button>
-                                        <button className={`offer-tab ${activeOfferTab === "Vacancies" ? "active" : ""}`} onClick={() => setActiveOfferTab("Vacancies")}>Vacancies</button>
+                                        <button className={`offer-tab ${activeOfferTab === "National Initiatives" ? "active" : ""}`} onClick={() => setActiveOfferTab("National Initiatives")}>National Initiatives</button>
+                                        <button className={`offer-tab ${activeOfferTab === "Join the Force" ? "active" : ""}`} onClick={() => setActiveOfferTab("Join the Force")}>Join the Force</button>
                                         <button className={`offer-tab ${activeOfferTab === "Tenders" ? "active" : ""}`} onClick={() => setActiveOfferTab("Tenders")}>Tenders</button>
                                     </div>
 
                                     <div className="offerings-tab-content">
-                                        {activeOfferTab === "Schemes" && (
+                                        {activeOfferTab === "National Initiatives" && (
                                             <ul className="offering-list">
                                                 <li><span>Assistance to States for Drug Law Enforcement (ASDLE)</span> <i className="bi bi-chevron-right"></i></li>
                                                 <li><span>Financial Assistance to NGOs for Awareness Programs</span> <i className="bi bi-chevron-right"></i></li>
@@ -397,7 +387,7 @@ function Home() {
                                                 <li><span>Modernization of Drug Law Enforcement Mechanism</span> <i className="bi bi-chevron-right"></i></li>
                                             </ul>
                                         )}
-                                        {activeOfferTab === "Vacancies" && (
+                                        {activeOfferTab === "Join the Force" && (
                                             <ul className="offering-list">
                                                 <li><span>Recruitment for the post of Junior Intelligence Officer 2025</span> <i className="bi bi-chevron-right"></i></li>
                                                 <li><span>Deputation of Sub-Inspectors in NCB Zonal Offices</span> <i className="bi bi-chevron-right"></i></li>
