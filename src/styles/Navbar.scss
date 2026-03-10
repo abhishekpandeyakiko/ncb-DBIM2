@@ -95,7 +95,7 @@
 /* ================= Header Layer 2: Main Branding (White) ================= */
 .header-main-branding {
     background-color: $white;
-    padding: 15px 0;
+    padding: 4px 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
@@ -113,12 +113,12 @@
 }
 
 .gov-emblem {
-    height: 50px;
+    height: 70px;
     width: auto;
 }
 
 .ncb-logo-small {
-    height: 50px;
+    height: 70px;
     width: auto;
 }
 
@@ -415,6 +415,7 @@
         left: 100%;
         background-color: $white;
         min-width: 280px;
+        padding: 0px;
         box-shadow: 12px 12px 30px rgba(0, 0, 0, 0.15);
         border-radius: 0 4px 4px 0;
         list-style: none;

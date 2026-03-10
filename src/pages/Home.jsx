@@ -82,6 +82,7 @@ function Home() {
     const pressScrollRef = useRef(null);
     const activityScrollRef = useRef(null);
     const portalsScrollRef = useRef(null);
+    const socialScrollRef = useRef(null);
 
     // Dynamic refs for real-time hover status in animation loops
     const newsHoverRef = useRef(false);
@@ -204,6 +205,22 @@ function Home() {
     }, [isGalleryPlaying, nextGallery]);
 
     const togglePlay = () => setIsPlaying(!isPlaying);
+
+    const handleSocialPrev = () => {
+        if (socialScrollRef.current) {
+            const card = socialScrollRef.current.querySelector('.social-card');
+            const cardWidth = card.getBoundingClientRect().width + 20; // card width + gap
+            socialScrollRef.current.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+        }
+    };
+
+    const handleSocialNext = () => {
+        if (socialScrollRef.current) {
+            const card = socialScrollRef.current.querySelector('.social-card');
+            const cardWidth = card.getBoundingClientRect().width + 20; // card width + gap
+            socialScrollRef.current.scrollBy({ left: cardWidth, behavior: 'smooth' });
+        }
+    };
 
     return (
         <div className="home-container">
@@ -650,103 +667,115 @@ function Home() {
             <section className="social-media-section">
                 <div className="container">
                     <div className="social-header-flex">
-                        <div className="social-icon-wrapper">
-                            <i className="bi bi-globe"></i>
-                            <div className="play-overlay">
-                                <i className="bi bi-play-fill"></i>
+                        <div className="social-header-left">
+                            <div className="social-icon-wrapper">
+                                <i className="bi bi-globe"></i>
+                                <div className="play-overlay">
+                                    <i className="bi bi-play-fill"></i>
+                                </div>
                             </div>
+                            <h2>Social Media</h2>
                         </div>
-                        <h2>Social Media</h2>
+                        <div className="social-nav-controls">
+                            <button className="social-nav-btn prev" onClick={handleSocialPrev} aria-label="Previous social card">
+                                <i className="bi bi-chevron-left"></i>
+                            </button>
+                            <button className="social-nav-btn next" onClick={handleSocialNext} aria-label="Next social card">
+                                <i className="bi bi-chevron-right"></i>
+                            </button>
+                        </div>
                     </div>
 
-                    <div className="social-grid">
-                        {/* Column 1: X (Twitter) */}
-                        <div className="social-card x-card">
-                            <div className="social-card-header">
-                                <h3>X</h3>
-                            </div>
-                            <div className="social-card-body">
-                                <iframe
-                                    className="social-iframe"
-                                    src="https://syndication.twitter.com/srv/timeline-profile/screen-name/narcoticsbureau"
-                                    title="X/Twitter Feed"
-                                ></iframe>
-                                <div className="embed-placeholder">
-                                    <i className="bi bi-twitter-x"></i>
-                                    <p>Follow @narcoticsbureau</p>
-                                    <a href="https://x.com/narcoticsbureau" target="_blank" rel="noopener noreferrer" className="visit-social-btn">VIEW ON X</a>
+                    <div className="social-viewport">
+                        <div className="social-grid" ref={socialScrollRef}>
+                            {/* Column 1: X (Twitter) */}
+                            <div className="social-card x-card">
+                                <div className="social-card-header">
+                                    <h3>X</h3>
                                 </div>
-                            </div>
-                        </div>
-
-                        {/* Column 2: Youtube */}
-                        <div className="social-card youtube-card">
-                            <div className="social-card-header">
-                                <h3>Youtube</h3>
-                            </div>
-                            <div className="social-card-body">
-                                <iframe
-                                    className="social-iframe"
-                                    src="https://www.youtube.com/embed/7V-Xv_Y0E6o?si=_2z_L4e_o8e_o8e_"
-                                    title="YouTube video player"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    allowFullScreen
-                                ></iframe>
-                                <div className="embed-placeholder">
-                                    <i className="bi bi-youtube"></i>
-                                    <p>NCB Official Channel</p>
-                                    <a href="https://www.youtube.com/channel/UCb3-9pF4m0BbLpW-yfR1Ipg" target="_blank" rel="noopener noreferrer" className="visit-social-btn">WATCH VIDEOS</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Column 3: Facebook */}
-                        <div className="social-card facebook-card">
-                            <div className="social-card-header">
-                                <h3>Facebook</h3>
-                            </div>
-                            <div className="social-card-body">
-                                <iframe
-                                    className="social-iframe"
-                                    src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fnarcoticscontrolbureauindia&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=true&show_facepile=false&appId"
-                                    title="Facebook Feed"
-                                ></iframe>
-                                <div className="embed-placeholder">
-                                    <i className="bi bi-facebook"></i>
-                                    <p>Connect on Facebook</p>
-                                    <a href="https://www.facebook.com/narcoticscontrolbureauindia" target="_blank" rel="noopener noreferrer" className="visit-social-btn">VISIT PAGE</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Column 4: Instagram */}
-                        <div className="social-card instagram-card">
-                            <div className="social-card-header">
-                                <h3>Instagram</h3>
-                            </div>
-                            <div className="social-card-body instagram-mock-body">
-                                <div className="insta-profile-header">
-                                    <div className="insta-avatar">
-                                        <img src="/logo.svg" alt="NCB" />
+                                <div className="social-card-body">
+                                    <iframe
+                                        className="social-iframe"
+                                        src="https://syndication.twitter.com/srv/timeline-profile/screen-name/narcoticsbureau"
+                                        title="X/Twitter Feed"
+                                    ></iframe>
+                                    <div className="embed-placeholder">
+                                        <i className="bi bi-twitter-x"></i>
+                                        <p>Follow @narcoticsbureau</p>
+                                        <a href="https://x.com/narcoticsbureau" target="_blank" rel="noopener noreferrer" className="visit-social-btn">VIEW ON X</a>
                                     </div>
-                                    <div className="insta-user-info">
-                                        <div className="insta-username">india.ncb <i className="bi bi-patch-check-fill"></i></div>
-                                        <div className="insta-followers">Social Awareness</div>
+                                </div>
+                            </div>
+
+                            {/* Column 2: Youtube */}
+                            <div className="social-card youtube-card">
+                                <div className="social-card-header">
+                                    <h3>Youtube</h3>
+                                </div>
+                                <div className="social-card-body">
+                                    <iframe
+                                        className="social-iframe"
+                                        src="https://www.youtube.com/embed/7V-Xv_Y0E6o?si=_2z_L4e_o8e_o8e_"
+                                        title="YouTube video player"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        allowFullScreen
+                                    ></iframe>
+                                    <div className="embed-placeholder">
+                                        <i className="bi bi-youtube"></i>
+                                        <p>NCB Official Channel</p>
+                                        <a href="https://www.youtube.com/channel/UCb3-9pF4m0BbLpW-yfR1Ipg" target="_blank" rel="noopener noreferrer" className="visit-social-btn">WATCH VIDEOS</a>
                                     </div>
-                                    <a href="https://www.instagram.com/india.ncb" target="_blank" rel="noopener noreferrer" className="insta-view-profile-link">View profile</a>
                                 </div>
-                                <div className="insta-post-preview">
-                                    <img src="https://images.unsplash.com/photo-1541873676947-9dc60f748d90?q=80&w=1000&auto=format&fit=crop" alt="NCB Activity" />
-                                    <div className="insta-type-icon"><i className="bi bi-display"></i></div>
+                            </div>
+
+                            {/* Column 3: Facebook */}
+                            <div className="social-card facebook-card">
+                                <div className="social-card-header">
+                                    <h3>Facebook</h3>
                                 </div>
-                                <div className="insta-card-footer">
-                                    <p><strong>india.ncb</strong> Mission Spandan: Spreading awareness against drug abuse across schools... <span className="more-link">more</span></p>
-                                    <a href="https://www.instagram.com/india.ncb" target="_blank" rel="noopener noreferrer" className="insta-action-btn">VIEW ON INSTAGRAM</a>
+                                <div className="social-card-body">
+                                    <iframe
+                                        className="social-iframe"
+                                        src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fnarcoticscontrolbureauindia&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=true&show_facepile=false&appId"
+                                        title="Facebook Feed"
+                                    ></iframe>
+                                    <div className="embed-placeholder">
+                                        <i className="bi bi-facebook"></i>
+                                        <p>Connect on Facebook</p>
+                                        <a href="https://www.facebook.com/narcoticscontrolbureauindia" target="_blank" rel="noopener noreferrer" className="visit-social-btn">VISIT PAGE</a>
+                                    </div>
                                 </div>
-                                <div className="embed-placeholder">
-                                    <i className="bi bi-instagram"></i>
-                                    <p>Official Instagram Feed</p>
-                                    <a href="https://www.instagram.com/india.ncb" target="_blank" rel="noopener noreferrer" className="visit-social-btn">VIEW PROFILE</a>
+                            </div>
+
+                            {/* Column 4: Instagram */}
+                            <div className="social-card instagram-card">
+                                <div className="social-card-header">
+                                    <h3>Instagram</h3>
+                                </div>
+                                <div className="social-card-body instagram-mock-body">
+                                    <div className="insta-profile-header">
+                                        <div className="insta-avatar">
+                                            <img src="/logo.svg" alt="NCB" />
+                                        </div>
+                                        <div className="insta-user-info">
+                                            <div className="insta-username">india.ncb <i className="bi bi-patch-check-fill"></i></div>
+                                            <div className="insta-followers">Social Awareness</div>
+                                        </div>
+                                        <a href="https://www.instagram.com/india.ncb" target="_blank" rel="noopener noreferrer" className="insta-view-profile-link">View profile</a>
+                                    </div>
+                                    <div className="insta-post-preview">
+                                        <img src="https://images.unsplash.com/photo-1541873676947-9dc60f748d90?q=80&w=1000&auto=format&fit=crop" alt="NCB Activity" />
+                                        <div className="insta-type-icon"><i className="bi bi-display"></i></div>
+                                    </div>
+                                    <div className="insta-card-footer">
+                                        <p><strong>india.ncb</strong> Mission Spandan: Spreading awareness against drug abuse across schools... <span className="more-link">more</span></p>
+                                        <a href="https://www.instagram.com/india.ncb" target="_blank" rel="noopener noreferrer" className="insta-action-btn">VIEW ON INSTAGRAM</a>
+                                    </div>
+                                    <div className="embed-placeholder">
+                                        <i className="bi bi-instagram"></i>
+                                        <p>Official Instagram Feed</p>
+                                        <a href="https://www.instagram.com/india.ncb" target="_blank" rel="noopener noreferrer" className="visit-social-btn">VIEW PROFILE</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

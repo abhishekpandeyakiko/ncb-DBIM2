@@ -29,7 +29,7 @@
 .hero-slider {
     position: relative;
     width: 100%;
-    height: 450px;
+    height: 550px;
     overflow: hidden;
     background-color: #000;
 }
@@ -549,9 +549,9 @@
 }
 
 .dg-portal-quote-text {
-    font-size: 26px;
+    font-size: 25px;
     color: var(--theme-navy, #003366);
-    font-weight: 700;
+    font-weight: 600;
     line-height: 1.35;
     margin-bottom: 20px;
     font-family: 'Inter', sans-serif;
@@ -2637,16 +2637,87 @@
             margin: 0;
             font-family: 'Inter', sans-serif;
             letter-spacing: -0.01em;
+
+            @media (max-width: 576px) {
+                font-size: 20px;
+            }
+        }
+
+        .social-header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .social-nav-controls {
+            display: flex;
+            gap: 12px;
+            margin-left: auto;
+
+            @media (max-width: 576px) {
+                gap: 8px;
+            }
+
+            .social-nav-btn {
+                width: 38px;
+                height: 38px;
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 8px;
+                color: #ffffff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                font-size: 18px;
+
+                @media (max-width: 576px) {
+                    width: 32px;
+                    height: 32px;
+                    font-size: 14px;
+                }
+
+                &:hover {
+                    background: #ffffff;
+                    color: var(--theme-navy, #003366);
+                    border-color: #ffffff;
+                    transform: translateY(-2px);
+                }
+
+                &:active {
+                    transform: translateY(0);
+                }
+            }
         }
     }
 
+    .social-viewport {
+        width: 100%;
+        overflow: hidden;
+    }
+
     .social-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        display: flex;
+        flex-wrap: nowrap;
         gap: 20px;
+        overflow-x: auto;
+        padding: 5px 5px 30px; // Added horizontal padding for shadow breathing
+        margin: 0 -5px; // Compensate for padding to maintain alignment
+        scrollbar-width: none; // Firefox
+        -ms-overflow-style: none; // Internet Explorer/Edge
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+
+        &::-webkit-scrollbar {
+            display: none; // Chrome, Safari, Opera
+        }
     }
 
     .social-card {
+        width: calc(25% - 15px); // 4 cards with gaps
+        flex-shrink: 0;
+        scroll-snap-align: start;
         background: #ffffff;
         border-radius: 4px;
         overflow: hidden;
@@ -2882,9 +2953,15 @@
 }
 
 // Responsive Social Grid
-@media (max-width: 1199px) {
-    .social-media-section .social-grid {
-        grid-template-columns: repeat(2, 1fr);
+@media (max-width: 1400px) {
+    .social-media-section .social-card {
+        width: calc(33.33% - 13.33px);
+    }
+}
+
+@media (max-width: 768px) {
+    .social-media-section .social-card {
+        width: calc(50% - 10px);
     }
 }
 
@@ -2892,8 +2969,23 @@
     .social-media-section {
         padding: 40px 0;
 
-        .social-grid {
-            grid-template-columns: 1fr;
+        .social-header-flex {
+            margin-bottom: 25px;
+        }
+
+        .social-card {
+            height: 420px;
+            width: calc(100% - 2px); // Allow tiny margin for shadow
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    .social-media-section {
+        padding: 30px 0;
+
+        .social-header-flex {
+            gap: 10px;
         }
 
         .social-card {

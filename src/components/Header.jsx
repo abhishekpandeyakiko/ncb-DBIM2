@@ -231,7 +231,7 @@ function Header() {
                             </button>
                             <div className="v-divider"></div>
                             <button className="utility-icon-btn" aria-label="Accessibility" onClick={toggleAccessibility}>
-                                <i className="bi bi-person-wheelchair"></i>
+                                <i className="bi bi-universal-access"></i>
                             </button>
                         </div>
                     </div>
